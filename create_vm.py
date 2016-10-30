@@ -19,7 +19,7 @@ credentials = GoogleCredentials.get_application_default()
 compute = discovery.build('compute', 'v1', credentials=credentials)
 
 parser = argparse.ArgumentParser(
-	description='Create a number of VMs in Google Compute Engine. Google Cloud SDK must be installed and configured (gcloud init) and google-api-python-client Python library must be installed.',
+	description='Create a number of VMs in Google Compute Engine. Google Cloud SDK must be installed and configured (gcloud init) and google-api-python-client and infoblox-client Python libraries must be installed.',
 	epilog='Example: \'./create_vm.py 10.138.0.0 test test.com --count 2\' will create two VMs, test1.test.com and test2.test.com')
 parser.add_argument('subnet', nargs=1, help='Subnet in which to create the VMs')
 parser.add_argument('prefix', default='test', help='Prefix for the VM names')

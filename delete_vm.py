@@ -14,7 +14,7 @@ credentials = GoogleCredentials.get_application_default()
 compute = discovery.build('compute', 'v1', credentials=credentials)
 
 parser = argparse.ArgumentParser(
-        description='Create a number of VMs in Google Compute Engine. Google Cloud SDK must be installed and configured (gcloud init) and google-api-python-client Python library must be installed.')
+        description='Create a number of VMs in Google Compute Engine. Google Cloud SDK must be installed and configured (gcloud init) and google-api-python-client and infoblox-client Python libraries must be installed.')
 parser.add_argument('name', nargs=1, help='FQDN of the VM to delete')
 args=parser.parse_args()
 
