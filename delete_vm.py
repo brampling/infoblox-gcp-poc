@@ -1,4 +1,5 @@
 #!/usr/bin/python
+import gcloudutils
 import sys
 import requests
 import argparse
@@ -28,20 +29,10 @@ name = args.name[0]
 opts = {'host': niosip, 'username': niosuser, 'password': niospw}
 conn = connector.Connector(opts)
 
-
-def delete_instance(compute, project, zone, name):
-	return compute.instances().delete(
-	project=project,
-	zone=zone,
-	instance=name).execute()
-
-print args.name
-
 for name in args.name:
 	splitname = name.split('.',1)
 	hostname = splitname[0]
 	domain = splitname[1]
-# [START delete_instance]
-	print(delete_instance(compute, project, zone, hostname))
+	print(gcloudutils.delete_instance(compute, project, zone, hostname))
 	hr = objects.HostRecord.search(conn, name=name)
 	objects.HostRecord.delete(hr)
