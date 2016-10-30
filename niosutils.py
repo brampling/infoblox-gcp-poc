@@ -30,11 +30,11 @@ def get_nextips(subnet, num, wapiurl, niosuser, niospw):
 	k = j['ips']
 	return k
 
-def create_host(host, ip, wapiurl, niosuser, niospw):
-	joburl = wapiurl + 'record:host'
-	print joburl
-	payload = '{"ipv4addrs": [{"ipv4addr": "10.138.0.2"}], "name": "test1.test.com"}'
-	print payload
-	resp = requests.post(joburl, auth=HTTPBasicAuth(niosuser, niospw),verify=False,params=payload)
-        j = resp.json()
-	return j
+#def create_host(host, ip, wapiurl, niosuser, niospw):
+#	joburl = wapiurl + 'record:host'
+#	print joburl
+#	payload = '{"ipv4addrs": [{"ipv4addr": "10.138.0.2"}], "name": "test1.test.com"}'
+#	print payload
+#	resp = requests.post(joburl, auth=HTTPBasicAuth(niosuser, niospw),verify=False,params=payload)
+#        j = resp.json()
+#	return j
