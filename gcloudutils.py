@@ -44,6 +44,24 @@ def create_instance(compute, project, zone, name, addr):
         zone=zone,
         body=config).execute()
 
+def create_network(compute, project, name):
+	config = {'name': name, 'autoCreateSubnetworks': False}
+	return compute.networks().insert(
+		project=project,
+		body=config).execute()
+
+def get_network_url(compute, project, name):
+	return compute.networks().get(
+		project=project,
+		network=name).execute()
+	
+def create_subnet(compute, project, zone, parent, name, addr):
+	config = {'name': name, 'network': parent, 'ipCidrRange': addr}
+	return compute.subnetworks().insert(
+		project=project,
+		region=zone,
+		body=config).execute()
+
 def wait_for_operation(compute, project, zone, operation):
     print('Waiting for operation to finish...')
     while True:

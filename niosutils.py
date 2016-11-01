@@ -30,6 +30,22 @@ def get_nextips(subnet, num, wapiurl, niosuser, niospw):
 	k = j['ips']
 	return k
 
+def get_nextnets(subnet, cidr, wapiurl, niosuser, niospw):
+	# Get the network object reference
+	joburl = wapiurl + 'networkcontainer'
+	payload = {'network': subnet}
+	resp = requests.get(joburl, auth=HTTPBasicAuth(niosuser, niospw),verify=False,params=payload)
+	j = resp.json()
+	k = j[0]
+	netref = k['_ref']
+	# Get the requested number of IPs and return a list
+	joburl = wapiurl + netref + '?_function=next_available_network'
+	payload = {'cidr': cidr}
+	resp = requests.post(joburl, auth=HTTPBasicAuth(niosuser, niospw),verify=False,params=payload)
+	j = resp.json()
+	k = j['networks']
+	return k
+
 #def create_host(host, ip, wapiurl, niosuser, niospw):
 #	joburl = wapiurl + 'record:host'
 #	print joburl
