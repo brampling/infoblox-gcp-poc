@@ -51,5 +51,7 @@ addr = netlist[0]
 
 output = gcloudutils.get_network_url(compute, project, parent)
 url = output['selfLink']
+netcreate = objects.Network.create(conn, cidr=addr)
+print netcreate
 output = gcloudutils.create_subnet(compute, project, region, url, name, addr)
 print output

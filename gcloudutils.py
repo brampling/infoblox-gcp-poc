@@ -55,12 +55,24 @@ def get_network_url(compute, project, name):
 		project=project,
 		network=name).execute()
 	
-def create_subnet(compute, project, zone, parent, name, addr):
+def create_subnet(compute, project, region, parent, name, addr):
 	config = {'name': name, 'network': parent, 'ipCidrRange': addr}
 	return compute.subnetworks().insert(
 		project=project,
-		region=zone,
+		region=region,
 		body=config).execute()
+
+def get_subnet(compute, project, region, name):
+	return compute.subnetworks().get(
+		project=project,
+		region=region,
+		subnetwork=name).execute()
+
+def delete_subnet(compute, project, region, name):
+	return compute.subnetworks().delete(
+		project=project,
+		region=region,
+		subnetwork=name).execute()
 
 def wait_for_operation(compute, project, zone, operation):
     print('Waiting for operation to finish...')
